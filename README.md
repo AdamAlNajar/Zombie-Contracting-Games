@@ -10,7 +10,9 @@
 - [x] Weapon switching  
 
 ## 🔧 In Progress
-- [ ]  
+- [ ]  Walking Footsteps
+- [ ]  Health UI
+- [ ]  Cave
 
 ## 🎯 Planned Features
 - [ ] Bullet trails  
