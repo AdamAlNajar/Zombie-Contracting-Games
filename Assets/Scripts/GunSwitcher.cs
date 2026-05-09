@@ -7,16 +7,34 @@ public class GunSwitcher : MonoBehaviour
 
     void Start()
     {
-        SelectWeapon(0);
+        SelectWeapon(currentWeapon);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            SelectWeapon(0);
+        // Scroll wheel input
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            SelectWeapon(1);
+        if (scroll > 0f)
+        {
+            currentWeapon++;
+
+            // Loop back to first weapon
+            if (currentWeapon >= weapons.Length)
+                currentWeapon = 0;
+
+            SelectWeapon(currentWeapon);
+        }
+        else if (scroll < 0f)
+        {
+            currentWeapon--;
+
+            // Loop back to last weapon
+            if (currentWeapon < 0)
+                currentWeapon = weapons.Length - 1;
+
+            SelectWeapon(currentWeapon);
+        }
     }
 
     void SelectWeapon(int index)
