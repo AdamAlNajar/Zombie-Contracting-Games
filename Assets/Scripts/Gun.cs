@@ -24,6 +24,9 @@ public class Gun : MonoBehaviour
 
     void HandleShooting()
     {
+        if(Dialog.Instance.DialogActive)
+            return;
+        
         bool canShoot = Time.time >= nextFireTime;
 
         if (isAuto)
