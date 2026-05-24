@@ -5,11 +5,12 @@ public class Player : MonoBehaviour
     [SerializeField] float currentHealth;
     public float startingHealth = 100f;
     public static Player instance;
+    public HealthBar healthBar;
 
     private void Start()
     {
         currentHealth = startingHealth;
-        
+        healthBar.SetMaxHealth(startingHealth);
     }
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {

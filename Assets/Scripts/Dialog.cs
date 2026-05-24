@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Dialog : MonoBehaviour
 {
-     public TMP_Text text;
+    public TMP_Text text;
     public string[] dialogLines;
     public float textSpeed;
     public bool DialogActive;
