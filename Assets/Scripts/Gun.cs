@@ -134,6 +134,7 @@ public class Gun : MonoBehaviour
         isReloading = true;
 
         Invoke(nameof(FinishReload), reloadTime);
+        UpdateAmmoUI();
     }
 
     void FinishReload()
@@ -159,9 +160,18 @@ public class Gun : MonoBehaviour
     void UpdateAmmoUI()
     {
         if (ammoText == null)
+        {
             return;
+        }
 
-        ammoText.text = currentAmmo + " / " + reserveAmmo;
+        if (isReloading)
+        {
+            ammoText.text = "Reloading...";
+        }
+        else
+        {
+            ammoText.text = currentAmmo + " / " + reserveAmmo;
+        }
 
         // Low ammo color
         if (currentAmmo <= 5)

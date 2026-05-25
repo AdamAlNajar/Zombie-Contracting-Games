@@ -9,9 +9,10 @@ public class EnemySpawner : MonoBehaviour
 
     public void SummonEnemies()
     {
-        int enemyAmnt = Random.Range(1, 10);
+        int enemyAmnt = Random.Range(10, 25);
 
-        Debug.Log("Summoned " + enemyAmnt + " enemies");
+        //Debug.Log("Summoned " + enemyAmnt + " enemies");
+        MessageSystem.Instance.ShowMessage(enemyAmnt.ToString() + " enemies spawned, Kill them all...", 5f);
 
         enemiesAlive = enemyAmnt;
 
@@ -39,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
         enemiesAlive--;
 
         Debug.Log("Enemies left: " + enemiesAlive);
+        MessageSystem.Instance.ShowMessage("Enemies left: " + enemiesAlive, 5f);
 
         if (enemiesAlive <= 0)
         {
