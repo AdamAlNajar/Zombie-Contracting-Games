@@ -8,6 +8,14 @@ public class Gun : MonoBehaviour
     public float fireRate = 5f;
     public bool isAuto = false;
 
+    [Header("Ammo")]
+    public int magazineSize = 30;
+    public int currentAmmo;
+    public int reserveAmmo = 90;
+    public float reloadTime = 2f;
+
+    private bool isReloading = false;
+
     [Header("References")]
     public Transform firePoint;
     public ParticleSystem muzzleFlash;
@@ -17,16 +25,38 @@ public class Gun : MonoBehaviour
 
     private float nextFireTime = 0f;
 
+    void Start()
+    {
+        currentAmmo = magazineSize;
+    }
+
     void Update()
     {
+        if (isReloading)
+            return;
+
+        // Reload key
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+            return;
+        }
+
         HandleShooting();
     }
 
     void HandleShooting()
     {
-        if(Dialog.Instance.DialogActive)
+        if (Dialog.Instance.DialogActive)
             return;
-        
+
+        // No ammo
+        if (currentAmmo <= 0)
+        {
+            Reload();
+            return;
+        }
+
         bool canShoot = Time.time >= nextFireTime;
 
         if (isAuto)
@@ -49,10 +79,18 @@ public class Gun : MonoBehaviour
 
     void Shoot()
     {
+        currentAmmo--;
+
         StartCoroutine(camShake.Shake(0.1f, 0.15f));
+
+        if (muzzleFlash != null)
+            muzzleFlash.Play();
+
+        if (shootSound != null)
+            shootSound.Play();
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-        // Convert 3D ray to 2D direction
         Vector2 direction = ray.direction;
 
         RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, range);
@@ -66,5 +104,36 @@ public class Gun : MonoBehaviour
                 enemy.TakeDamage(damage);
             }
         }
+    }
+
+    void Reload()
+    {
+        if (isReloading)
+            return;
+
+        if (reserveAmmo <= 0)
+            return;
+
+        isReloading = true;
+
+        Invoke(nameof(FinishReload), reloadTime);
+    }
+
+    void FinishReload()
+    {
+        int ammoNeeded = magazineSize - currentAmmo;
+
+        int ammoToLoad = Mathf.Min(ammoNeeded, reserveAmmo);
+
+        currentAmmo += ammoToLoad;
+        reserveAmmo -= ammoToLoad;
+
+        isReloading = false;
+    }
+
+    // Called by ammo boxes
+    public void AddAmmo(int amount)
+    {
+        reserveAmmo += amount;
     }
 }
