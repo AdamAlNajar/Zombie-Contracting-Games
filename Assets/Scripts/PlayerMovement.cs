@@ -19,6 +19,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Dialog.Instance.DialogActive)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
         if (isRunning == false)
             rb.linearVelocity = moveInput * speed;
         if(isRunning == true)
