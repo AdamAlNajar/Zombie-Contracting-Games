@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class Gun : MonoBehaviour
 {
     [Header("Stats")]
@@ -25,13 +25,18 @@ public class Gun : MonoBehaviour
 
     private float nextFireTime = 0f;
 
+    [Header("UI")]
+    public TMP_Text ammoText;
+
     void Start()
     {
         currentAmmo = magazineSize;
+        UpdateAmmoUI();
     }
 
     void Update()
     {
+        UpdateAmmoUI();
         if (isReloading)
             return;
 
@@ -53,7 +58,15 @@ public class Gun : MonoBehaviour
         // No ammo
         if (currentAmmo <= 0)
         {
-            Reload();
+            if (reserveAmmo > 0)
+            {
+                Reload();
+            }
+            else
+            {
+                MessageSystem.Instance.ShowMessage("Out of Ammo!");
+            }
+
             return;
         }
 
@@ -80,6 +93,7 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         currentAmmo--;
+        UpdateAmmoUI();
 
         StartCoroutine(camShake.Shake(0.1f, 0.15f));
 
@@ -114,6 +128,9 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0)
             return;
 
+        if (currentAmmo >= magazineSize)
+            return;
+
         isReloading = true;
 
         Invoke(nameof(FinishReload), reloadTime);
@@ -129,11 +146,27 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToLoad;
 
         isReloading = false;
+        UpdateAmmoUI();
     }
 
     // Called by ammo boxes
     public void AddAmmo(int amount)
     {
         reserveAmmo += amount;
+        UpdateAmmoUI();
+    }
+
+    void UpdateAmmoUI()
+    {
+        if (ammoText == null)
+            return;
+
+        ammoText.text = currentAmmo + " / " + reserveAmmo;
+
+        // Low ammo color
+        if (currentAmmo <= 5)
+            ammoText.color = Color.red;
+        else
+            ammoText.color = Color.white;
     }
 }
