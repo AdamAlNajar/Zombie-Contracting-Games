@@ -1,6 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-
+using System;
 public class Enemy : MonoBehaviour
 {
    public float damage = 5f;
@@ -8,7 +7,7 @@ public class Enemy : MonoBehaviour
     float currentHealth;
     public float attackCooldown = 1f;
     float attackTimer;
-
+    public Action OnDeath;
     public float speed = 3f;
     float distance;
     public float distanceBetween = 4f;
@@ -52,6 +51,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        OnDeath?.Invoke();
         Destroy(gameObject);
     }
 

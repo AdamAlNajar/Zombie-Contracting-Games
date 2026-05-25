@@ -1,15 +1,19 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform enemySpawnPos;
     public GameObject enemyPrefab;
+    public UnityEvent onAllEnemiesDefeated;
+    int enemiesAlive;
 
     public void SummonEnemies()
     {
         int enemyAmnt = Random.Range(1, 10);
 
         Debug.Log("Summoned " + enemyAmnt + " enemies");
+
+        enemiesAlive = enemyAmnt;
 
         for (int i = 0; i < enemyAmnt; i++)
         {
@@ -20,8 +24,27 @@ public class EnemySpawner : MonoBehaviour
 
             Vector2 spawnPos = (Vector2)enemySpawnPos.position + randomOffset;
 
-            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+            Enemy enemyScript = enemy.GetComponent<Enemy>();
+            if(enemyScript != null)
+            {
+                enemyScript.OnDeath += HandleEnemyDeath;
+            }
         }
-        // make a function to display splash and take to main enu after killing all
+    }
+
+    void HandleEnemyDeath()
+    {
+        enemiesAlive--;
+
+        Debug.Log("Enemies left: " + enemiesAlive);
+
+        if (enemiesAlive <= 0)
+        {
+            Debug.Log("All enemies defeated!");
+
+            onAllEnemiesDefeated?.Invoke();
+        }
     }
 }
