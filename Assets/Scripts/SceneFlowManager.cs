@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,10 +16,15 @@ public class SceneFlowManager : MonoBehaviour
         }
 
         Instance = this;
-
         DontDestroyOnLoad(gameObject);
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
 
     public void HandleAllEnemiesDefeated()
     {
@@ -30,13 +36,43 @@ public class SceneFlowManager : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator ShowSplashThenLoadMenu()
+    private IEnumerator ShowSplashThenLoadMenu()
     {
         splashScreen.SetActive(true);
 
         yield return new WaitForSeconds(3f);
+
         splashScreen.SetActive(false);
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    // 🔥 THIS IS THE IMPORTANT ADDITION
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainMenu")
+        {
+            SetMainMenuState(true);
+        }
+        else if (scene.name == "Prolog")
+        {
+            SetMainMenuState(false);
+        }
+    }
+
+    // keep your variable name concept
+    public GameObject[] gameSceneObjects;
+
+    private void SetMainMenuState(bool isMenu)
+    {
+        if (gameSceneObjects == null) return;
+
+        for (int i = 0; i < gameSceneObjects.Length; i++)
+        {
+            if (gameSceneObjects[i] != null)
+            {
+                gameSceneObjects[i].SetActive(!isMenu);
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SummonEnemies()
     {
-        int enemyAmnt = Random.Range(10, 25);
+        int enemyAmnt = Random.Range(10, 15);
 
         //Debug.Log("Summoned " + enemyAmnt + " enemies");
         MessageSystem.Instance.ShowMessage(enemyAmnt.ToString() + " enemies spawned, Kill them all...", 5f);
