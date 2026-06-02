@@ -6,6 +6,12 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float runningMult = 3.5f;
     bool isRunning = false;
+    private Dialog dialog;
+
+    void Start()
+    {
+        dialog = FindFirstObjectByType<Dialog>();
+    }
 
     Vector2 moveInput;
     private void Update()
@@ -19,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Dialog.Instance.DialogActive)
+        if (dialog.DialogActive)
         {
             rb.linearVelocity = Vector2.zero;
             return;

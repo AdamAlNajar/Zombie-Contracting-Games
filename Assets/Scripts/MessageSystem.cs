@@ -4,7 +4,6 @@ using System.Collections;
 
 public class MessageSystem : MonoBehaviour
 {
-    public static MessageSystem Instance;
 
     [Header("UI")]
     [SerializeField] private TMP_Text messageText;
@@ -16,16 +15,6 @@ public class MessageSystem : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton setup
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
         messageText.gameObject.SetActive(false);
     }
 

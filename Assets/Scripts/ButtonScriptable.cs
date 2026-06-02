@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class ButtonScriptable : MonoBehaviour
 {
-     public UnityEvent onPressed;
+    public UnityEvent onPressed;
 
     private bool pressed = false;
 

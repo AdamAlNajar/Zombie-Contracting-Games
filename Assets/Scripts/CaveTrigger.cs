@@ -16,7 +16,7 @@ public class CaveTrigger : MonoBehaviour
             player.transform.position = transportPoint.transform.position;
             
             // Set dialog lines for the cave story
-            Dialog.Instance.dialogLines = new string[]
+            dialogCave.dialogLines = new string[]
             {
                 "You step into the cave...",
                 "It's cold and dark.",
@@ -28,9 +28,9 @@ public class CaveTrigger : MonoBehaviour
             };
             
             // IMPORTANT: Activate textBox BEFORE starting dialog
-            Dialog.Instance.textBox.SetActive(true);
+           dialogCave.textBox.SetActive(true);
         
-            Dialog.Instance.StartDialog();
+            dialogCave.StartDialog();
         }
     }
 

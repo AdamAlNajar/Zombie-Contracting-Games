@@ -5,14 +5,29 @@ public class EnemySpawner : MonoBehaviour
     public Transform enemySpawnPos;
     public GameObject enemyPrefab;
     public UnityEvent onAllEnemiesDefeated;
+    public MessageSystem messageSystem;
+
     int enemiesAlive;
+    public int battleIndex = 0;
 
     public void SummonEnemies()
     {
-        int enemyAmnt = Random.Range(10, 15);
+        int enemyAmnt;
 
-        //Debug.Log("Summoned " + enemyAmnt + " enemies");
-        MessageSystem.Instance.ShowMessage(enemyAmnt.ToString() + " enemies spawned, Kill them all...", 5f);
+        switch (battleIndex)
+        {
+            case 0:
+                enemyAmnt = Random.Range(10, 15);
+                break;
+            default:
+                enemyAmnt = 2;
+                break;
+        }
+
+        messageSystem.ShowMessage(
+            enemyAmnt.ToString() + " enemies spawned, Kill them all...",
+            5f
+        );
 
         enemiesAlive = enemyAmnt;
 
@@ -28,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
             Enemy enemyScript = enemy.GetComponent<Enemy>();
-            if(enemyScript != null)
+            if (enemyScript != null)
             {
                 enemyScript.OnDeath += HandleEnemyDeath;
             }
@@ -40,11 +55,18 @@ public class EnemySpawner : MonoBehaviour
         enemiesAlive--;
 
         Debug.Log("Enemies left: " + enemiesAlive);
-        MessageSystem.Instance.ShowMessage("Enemies left: " + enemiesAlive, 5f);
+        messageSystem.ShowMessage("Enemies left: " + enemiesAlive, 5f);
 
         if (enemiesAlive <= 0)
         {
             Debug.Log("All enemies defeated!");
+
+            // ✅ ONLY CHANGE: replace PlayerPrefs with GameData
+            if (battleIndex == 0)
+            {
+                GameData.Instance.prologFinished = true;
+                onAllEnemiesDefeated?.Invoke();
+            }
 
             onAllEnemiesDefeated?.Invoke();
         }

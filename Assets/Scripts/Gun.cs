@@ -15,6 +15,7 @@ public class Gun : MonoBehaviour
     public float reloadTime = 2f;
 
     private bool isReloading = false;
+    private float nextFireTime = 0f;
 
     [Header("References")]
     public Transform firePoint;
@@ -23,24 +24,29 @@ public class Gun : MonoBehaviour
     public Camera cam;
     public CameraShake camShake;
 
-    private float nextFireTime = 0f;
+    private MessageSystem messageSystem;
+    private Dialog dialog;
 
-    [Header("UI")]
-    public TMP_Text ammoText;
-
-    void Start()
+    private void OnEnable()
     {
-        currentAmmo = magazineSize;
-        UpdateAmmoUI();
+        // when weapon becomes active via GunSwitcher
+        WeaponManager.Instance.SetCurrentGun(this);
+
+        if (currentAmmo <= 0)
+            currentAmmo = magazineSize;
+
+        messageSystem = FindFirstObjectByType<MessageSystem>();
+        dialog = FindFirstObjectByType<Dialog>();
     }
 
     void Update()
     {
-        UpdateAmmoUI();
+        if (!gameObject.activeInHierarchy)
+            return;
+
         if (isReloading)
             return;
 
-        // Reload key
         if (Input.GetKeyDown(KeyCode.R))
         {
             Reload();
@@ -52,20 +58,15 @@ public class Gun : MonoBehaviour
 
     void HandleShooting()
     {
-        if (Dialog.Instance.DialogActive)
+        if (dialog != null && dialog.DialogActive)
             return;
 
-        // No ammo
         if (currentAmmo <= 0)
         {
             if (reserveAmmo > 0)
-            {
                 Reload();
-            }
             else
-            {
-                MessageSystem.Instance.ShowMessage("Out of Ammo!");
-            }
+                messageSystem.ShowMessage("Out of Ammo!");
 
             return;
         }
@@ -76,16 +77,16 @@ public class Gun : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && canShoot)
             {
-                nextFireTime = Time.time + 1f / fireRate;
                 Shoot();
+                nextFireTime = Time.time + 1f / fireRate;
             }
         }
         else
         {
             if (Input.GetMouseButtonDown(0) && canShoot)
             {
-                nextFireTime = Time.time + 1f / fireRate;
                 Shoot();
+                nextFireTime = Time.time + 1f / fireRate;
             }
         }
     }
@@ -93,9 +94,10 @@ public class Gun : MonoBehaviour
     void Shoot()
     {
         currentAmmo--;
-        UpdateAmmoUI();
 
-        StartCoroutine(camShake.Shake(0.1f, 0.15f));
+
+        if (camShake != null)
+            StartCoroutine(camShake.Shake(0.1f, 0.15f));
 
         if (muzzleFlash != null)
             muzzleFlash.Play();
@@ -104,15 +106,11 @@ public class Gun : MonoBehaviour
             shootSound.Play();
 
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        Vector2 direction = ray.direction;
-
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, direction, range);
+        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, ray.direction, range);
 
         if (hit.collider != null)
         {
             Enemy enemy = hit.collider.GetComponent<Enemy>();
-
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
@@ -133,50 +131,29 @@ public class Gun : MonoBehaviour
 
         isReloading = true;
 
+
         Invoke(nameof(FinishReload), reloadTime);
-        UpdateAmmoUI();
     }
 
     void FinishReload()
     {
         int ammoNeeded = magazineSize - currentAmmo;
-
         int ammoToLoad = Mathf.Min(ammoNeeded, reserveAmmo);
 
         currentAmmo += ammoToLoad;
         reserveAmmo -= ammoToLoad;
 
         isReloading = false;
-        UpdateAmmoUI();
+
     }
 
-    // Called by ammo boxes
     public void AddAmmo(int amount)
     {
         reserveAmmo += amount;
-        UpdateAmmoUI();
     }
 
-    void UpdateAmmoUI()
+    public bool IsReloading()
     {
-        if (ammoText == null)
-        {
-            return;
-        }
-
-        if (isReloading)
-        {
-            ammoText.text = "Reloading...";
-        }
-        else
-        {
-            ammoText.text = currentAmmo + " / " + reserveAmmo;
-        }
-
-        // Low ammo color
-        if (currentAmmo <= 5)
-            ammoText.color = Color.red;
-        else
-            ammoText.color = Color.white;
+        return isReloading;
     }
 }

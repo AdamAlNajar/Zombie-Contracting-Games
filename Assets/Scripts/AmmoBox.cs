@@ -4,6 +4,12 @@ public class AmmoBox : MonoBehaviour
 {
     public int minAmmo = 10;
     public int maxAmmo = 40;
+    private MessageSystem messageSystem;
+
+    void Start()
+    {
+        messageSystem = FindFirstObjectByType<MessageSystem>();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -21,8 +27,8 @@ public class AmmoBox : MonoBehaviour
         randomGun.AddAmmo(ammoAmount);
 
         //Debug.Log("Added " + ammoAmount + " ammo to " + randomGun.name);
-        MessageSystem.Instance.SetColor(Color.white);
-        MessageSystem.Instance.ShowMessage("Added " + ammoAmount + " ammo to " + randomGun.name, 3f);
+        messageSystem.SetColor(Color.white);
+        messageSystem.ShowMessage("Added " + ammoAmount + " ammo to " + randomGun.name, 3f);
 
         Destroy(gameObject);
     }

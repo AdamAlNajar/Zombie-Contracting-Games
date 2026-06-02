@@ -9,20 +9,8 @@ public class Dialog : MonoBehaviour
     public float textSpeed;
     public bool DialogActive;
     int index;
-    public static Dialog Instance;
     public GameObject textBox;
 
-    void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
     
     void Start()
     {

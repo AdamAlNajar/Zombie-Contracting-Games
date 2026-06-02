@@ -1,16 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
-    public void PlayTutorial()
+    public void OnPlayPressed()
     {
-        SceneManager.LoadScene("Prolog");
+        SceneFlowManager.Instance.StartGameFlow();
     }
-    public void Play()
-    {
-        SceneManager.LoadScene("Game 1");
-    }
-    public void Quit()
+
+    public void OnQuitPressed()
     {
         Application.Quit();
     }
