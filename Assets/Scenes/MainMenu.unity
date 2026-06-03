@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f08da67bdb44e4088928bd76eae6d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentGun: {fileID: 0}
 --- !u!4 &576267105
 Transform:
   m_ObjectHideFlags: 0
@@ -739,6 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ff364ac6169c641afd47b076621a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splashDuration: 3
 --- !u!1 &1131523411
 GameObject:
   m_ObjectHideFlags: 0

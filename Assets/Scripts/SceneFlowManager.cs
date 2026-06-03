@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 public class SceneFlowManager : MonoBehaviour
 {
     public static SceneFlowManager Instance;
+    public float splashDuration;
+
+    private const string MAIN_MENU_SCENE = "MainMenu";
+    private const string PROLOGUE_SCENE = "Prolog";
+    private const string GAME_SCENE = "Game 1";
 
     private void Awake()
     {
@@ -20,18 +25,17 @@ public class SceneFlowManager : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(MAIN_MENU_SCENE);
     }
 
     public void LoadPrologue()
     {
-        SceneManager.LoadScene("Prolog");
+        SceneManager.LoadScene(PROLOGUE_SCENE);
     }
 
     public void LoadGame()
     {
-        // For now
-        SceneManager.LoadScene("Game 1");
+        SceneManager.LoadScene(GAME_SCENE);
     }
 
     public void StartGameFlow()
@@ -40,5 +44,41 @@ public class SceneFlowManager : MonoBehaviour
             LoadGame();
         else
             LoadPrologue();
+    }
+
+    private void ShowText(string message)
+    {
+        if (TransitionUI.Instance != null)
+            TransitionUI.Instance.Show(message);
+
+        Debug.Log("Showing text");
+    }
+
+    /// <summary>
+    /// Called when the prologue is completed.
+    /// Shows the presentation/loading screen,
+    /// preloads the game scene, then switches.
+    /// </summary>
+    public void CompletePrologue()
+    {
+        GameData.Instance.prologFinished = true;
+        StartCoroutine(ShowSplashThenLoadGame());
+    }
+
+    private IEnumerator ShowSplashThenLoadGame()
+    {
+        ShowText("Adam Al Najar Presents\nZombie Contracting\nLoading Scene...");
+
+    AsyncOperation loadOperation =
+        SceneManager.LoadSceneAsync(GAME_SCENE);
+
+    loadOperation.allowSceneActivation = false;
+
+    while (loadOperation.progress < 0.9f)
+        yield return null;
+
+    yield return new WaitForSeconds(splashDuration);
+
+    loadOperation.allowSceneActivation = true;
     }
 }
