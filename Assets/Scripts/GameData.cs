@@ -5,7 +5,6 @@ public class GameData : MonoBehaviour
     public int gameCoins;
     public static GameData Instance;
     public bool prologFinished;
-
     private void Awake()
     {
         // Singleton setup
@@ -19,6 +18,7 @@ public class GameData : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+        SaveSystem.LoadGame();
     }
 
 }

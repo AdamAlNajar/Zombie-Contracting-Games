@@ -44,6 +44,7 @@ public class SceneFlowManager : MonoBehaviour
             LoadGame();
         else
             LoadPrologue();
+        Debug.Log($"Prolog Finished: {GameData.Instance.prologFinished}");
     }
 
     private void ShowText(string message)
@@ -62,6 +63,7 @@ public class SceneFlowManager : MonoBehaviour
     public void CompletePrologue()
     {
         GameData.Instance.prologFinished = true;
+        SaveSystem.SaveGame();
         StartCoroutine(ShowSplashThenLoadGame());
     }
 
