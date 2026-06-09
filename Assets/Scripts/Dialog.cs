@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.Events;
 
 public class Dialog : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Dialog : MonoBehaviour
     public string[] dialogLines;
     public float textSpeed;
     public bool DialogActive;
+    public UnityEvent onDialogComplete;
     int index;
     public GameObject textBox;
 
@@ -96,6 +98,7 @@ public class Dialog : MonoBehaviour
         } 
         else
         {
+            onDialogComplete?.Invoke(); 
             // END OF DIALOG - CLEAR EVERYTHING
             DialogActive = false;
             

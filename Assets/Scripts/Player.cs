@@ -1,11 +1,12 @@
 using UnityEngine;
-
+using TMPro;
 public class Player : MonoBehaviour
 {
     [SerializeField] float currentHealth;
+    [SerializeField] TMP_Text coinsText;
     public float startingHealth = 100f;
 
-        private void Start()
+    private void Start()
     {
         currentHealth = startingHealth;
 
@@ -16,9 +17,13 @@ public class Player : MonoBehaviour
         }
 
         HealthBar.Instance.SetMaxHealth(startingHealth);
+        coinsText.text = GameData.Instance.gameCoins.ToString();
     }
 
-
+    void Update()
+    {
+        coinsText.text = GameData.Instance.gameCoins.ToString();
+    }
 
     public void TakeDamage(float damage)
     {

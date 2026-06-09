@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public Action OnDeath;
     public float speed = 3f;
     float distance;
-    public float distanceBetween = 4f;
+    public float distanceBetween = 8f;
     public float separationRadius = 1f;
     public float separationStrength = 2f;
 

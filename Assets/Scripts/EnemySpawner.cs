@@ -19,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
             case 0:
                 enemyAmnt = Random.Range(10, 15);
                 break;
+            case 1:
+                enemyAmnt = 20;
+                break;
             default:
                 enemyAmnt = 2;
                 break;
@@ -52,10 +55,12 @@ public class EnemySpawner : MonoBehaviour
 
     void HandleEnemyDeath()
     {
+        
         enemiesAlive--;
 
         Debug.Log("Enemies left: " + enemiesAlive);
         messageSystem.ShowMessage("Enemies left: " + enemiesAlive, 5f);
+        AddEnemyKillCoins();
 
         if (enemiesAlive <= 0)
         {
@@ -70,5 +75,22 @@ public class EnemySpawner : MonoBehaviour
 
             onAllEnemiesDefeated?.Invoke();
         }
+    }
+
+    public void AddBattleCoins(int coins)
+    {
+        int coinsToAdd = coins;
+        GameData.Instance.gameCoins += coinsToAdd;
+        messageSystem.ShowMessage("Added " + coinsToAdd + " coins to your account");
+        SaveSystem.SaveGame();
+    }
+
+    public void AddEnemyKillCoins()
+    {
+        int coinsToAdd = Random.Range(3,10);
+        GameData.Instance.gameCoins += coinsToAdd;
+        messageSystem.ShowMessage("Added " + coinsToAdd + " coins to your account");
+
+        SaveSystem.SaveGame();
     }
 }
