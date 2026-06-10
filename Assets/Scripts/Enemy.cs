@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public Action OnDeath;
     public float speed = 3f;
     float distance;
-    public float distanceBetween = 8f;
+    public float distanceBetween = 13f;
     public float separationRadius = 1f;
     public float separationStrength = 2f;
 
@@ -101,8 +101,8 @@ public class Enemy : MonoBehaviour
 
         Vector2 target = rb.position + moveDir * speed * Time.fixedDeltaTime;
 
-        rb.MovePosition(target);
+        rb.linearVelocity = moveDir * speed;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        rb.MoveRotation(angle);
     }
 }

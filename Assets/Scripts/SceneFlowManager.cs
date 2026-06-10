@@ -6,7 +6,7 @@ public class SceneFlowManager : MonoBehaviour
 {
     public static SceneFlowManager Instance;
     public float splashDuration;
-
+    public bool prologStarted;
     private const string MAIN_MENU_SCENE = "MainMenu";
     private const string PROLOGUE_SCENE = "Prolog";
     private const string GAME_SCENE = "Game 1";
@@ -31,12 +31,16 @@ public class SceneFlowManager : MonoBehaviour
     public void LoadPrologue()
     {
         SceneManager.LoadScene(PROLOGUE_SCENE);
+        prologStarted = true;
     }
 
     public void LoadGame()
     {
         SceneManager.LoadScene(GAME_SCENE);
     }
+
+    // Here will be a function that loads a contract scene
+    // Do not forget
 
     public void StartGameFlow()
     {

@@ -23,9 +23,24 @@ public class AmmoUI : MonoBehaviour
             Debug.Log("ammoText is NULL");
             return;
         }
+        
 
         Gun gun = WeaponManager.Instance.currentGun;
 
-        ammoText.text = gun.currentAmmo + " / " + gun.reserveAmmo;
+        if (gun.IsReloading())
+        {
+            ammoText.text = "Reloading";
+            ammoText.color = Color.red;
+        }
+        else if (gun.currentAmmo <= 10)
+        {
+            ammoText.text = "Press R to reload " + gun.currentAmmo + " / " + gun.reserveAmmo;
+            ammoText.color = Color.red;
+        }
+        else
+        {
+            ammoText.text = gun.currentAmmo + " / " + gun.reserveAmmo;
+            ammoText.color = Color.white;
+        }
     }
 }

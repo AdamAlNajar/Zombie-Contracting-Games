@@ -60,7 +60,10 @@ public class EnemySpawner : MonoBehaviour
 
         Debug.Log("Enemies left: " + enemiesAlive);
         messageSystem.ShowMessage("Enemies left: " + enemiesAlive, 5f);
-        AddEnemyKillCoins();
+        if(battleIndex != 0)
+        {
+            AddEnemyKillCoins();
+        }
 
         if (enemiesAlive <= 0)
         {

@@ -5,6 +5,7 @@ public class GameData : MonoBehaviour
     public int gameCoins;
     public static GameData Instance;
     public bool prologFinished;
+    public bool level1SeriesOfEventsCompleted;
     private void Awake()
     {
         // Singleton setup

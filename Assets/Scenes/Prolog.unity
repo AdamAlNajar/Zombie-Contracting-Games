@@ -906,7 +906,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -1001,6 +1001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  coinsText: {fileID: 0}
   startingHealth: 150
 --- !u!1 &478844791
 GameObject:
@@ -2961,6 +2962,9 @@ MonoBehaviour:
   dialogLines: []
   textSpeed: 0.05
   DialogActive: 0
+  onDialogComplete:
+    m_PersistentCalls:
+      m_Calls: []
   textBox: {fileID: 1634352116}
 --- !u!114 &1118400397
 MonoBehaviour:
@@ -7291,6 +7295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1abd5257f86aaba46b929df4017cae2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialog: {fileID: 1118400396}
 --- !u!1 &1884009358
 GameObject:
   m_ObjectHideFlags: 0

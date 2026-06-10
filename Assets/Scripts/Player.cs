@@ -17,12 +17,17 @@ public class Player : MonoBehaviour
         }
 
         HealthBar.Instance.SetMaxHealth(startingHealth);
-        coinsText.text = GameData.Instance.gameCoins.ToString();
+        if(coinsText != null)
+            coinsText.text = GameData.Instance.gameCoins.ToString();
     }
 
     void Update()
     {
-        coinsText.text = GameData.Instance.gameCoins.ToString();
+        if(coinsText != null)
+        {
+            coinsText.text = GameData.Instance.gameCoins.ToString();
+            coinsText.color = Color.white;
+        }
     }
 
     public void TakeDamage(float damage)
