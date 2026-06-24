@@ -5610,19 +5610,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
+      propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1066762263}
+      objectReference: {fileID: 1286500118}
+    - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
+      propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartBattle
+      value: LoadMission1
       objectReference: {fileID: 0}
     - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
       propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: BattleInit, Assembly-CSharp
+      value: MissionsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707039809750876889, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
+      propertyPath: onPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3530081265548640022, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
       propertyPath: m_SortingLayer

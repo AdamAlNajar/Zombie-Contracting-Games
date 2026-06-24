@@ -39,9 +39,6 @@ public class SceneFlowManager : MonoBehaviour
         SceneManager.LoadScene(GAME_SCENE);
     }
 
-    // Here will be a function that loads a contract scene
-    // Do not forget
-
     public void StartGameFlow()
     {
         if (GameData.Instance.prologFinished)
