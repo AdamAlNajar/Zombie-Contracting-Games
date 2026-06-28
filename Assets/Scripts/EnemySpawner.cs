@@ -22,6 +22,10 @@ public class EnemySpawner : MonoBehaviour
             case 1:
                 enemyAmnt = 20;
                 break;
+            case 2:
+                enemyAmnt = Random.Range(12,17);
+                Debug.Log(enemyAmnt);
+                break;
             default:
                 enemyAmnt = 2;
                 break;

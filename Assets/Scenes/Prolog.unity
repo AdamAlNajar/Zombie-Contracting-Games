@@ -2615,69 +2615,22 @@ MonoBehaviour:
   shootSound: {fileID: 0}
   cam: {fileID: 519420031}
   camShake: {fileID: 519420034}
---- !u!1 &984827816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 984827817}
-  - component: {fileID: 984827818}
-  m_Layer: 0
-  m_Name: EnemySpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &984827817
+--- !u!4 &984827817 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+  m_PrefabInstance: {fileID: 4164055075231046896}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984827816}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.2, y: 1.68, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 653517999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &984827818
+--- !u!114 &984827818 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9099935396282417539, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+  m_PrefabInstance: {fileID: 4164055075231046896}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984827816}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 212d909a2f37d4f48a838a3dfbf785db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawnPos: {fileID: 984827817}
-  enemyPrefab: {fileID: 7935653736857626991, guid: 6a14ece3580858049b6fc7249e51e13c, type: 3}
-  onAllEnemiesDefeated:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1736393975}
-        m_TargetAssemblyTypeName: PrologController, Assembly-CSharp
-        m_MethodName: OnPrologueCompleted
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  messageSystem: {fileID: 1118400397}
-  battleIndex: 0
 --- !u!1 &1010189479
 GameObject:
   m_ObjectHideFlags: 0
@@ -8484,6 +8437,71 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}
+--- !u!1001 &4164055075231046896
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 653517999}
+    m_Modifications:
+    - target: {fileID: 1451786523250399791, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_Name
+      value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6640518771517158219, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9099935396282417539, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: messageSystem
+      value: 
+      objectReference: {fileID: 1118400397}
+    - target: {fileID: 9099935396282417539, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
+      propertyPath: onAllEnemiesDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1736393975}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dbf4496823494234ba8d7916b6cd3495, type: 3}
 --- !u!1001 &5852379165017635024
 PrefabInstance:
   m_ObjectHideFlags: 0
