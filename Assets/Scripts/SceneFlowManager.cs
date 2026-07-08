@@ -48,6 +48,11 @@ public class SceneFlowManager : MonoBehaviour
         Debug.Log($"Prolog Finished: {GameData.Instance.prologFinished}");
     }
 
+    public void LoadMission(string missionLvlName)
+    {
+        SceneManager.LoadScene(missionLvlName);
+    }
+
     private void ShowText(string message)
     {
         if (TransitionUI.Instance != null)
