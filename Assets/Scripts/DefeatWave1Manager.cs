@@ -1,11 +1,35 @@
 using UnityEngine;
 
+/// <summary>
+/// This script is kept for backward compatibility.
+/// When a wave is defeated, it signals the MissionController
+/// which handles the completion flow (dialog → coins → return to hub).
+/// 
+/// If no MissionController is active, it falls back to the legacy behavior
+/// of showing the mission board directly.
+/// </summary>
 public class DefeatWave1Manager : MonoBehaviour
 {
     public Dialog dialog;
+    private bool used = false;
 
     public void OnDefeat()
     {
+        if (used) return;
+        used = true;
+
+        // Check if a MissionController is running this mission
+        MissionController controller = FindFirstObjectByType<MissionController>();
+        if (controller != null)
+        {
+            // MissionController will handle dialog and completion
+            // We just need to set level1SeriesOfEventsCompleted for legacy compatibility
+            GameData.Instance.level1SeriesOfEventsCompleted = true;
+            SaveSystem.SaveGame();
+            return;
+        }
+
+        // Legacy behavior (no MissionController found)
         dialog.dialogLines = new string[]
         {
             "??? : Impressive work, soldier. Didn't think you'd make it through that.",

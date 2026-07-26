@@ -21,6 +21,14 @@ public class SceneFlowManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Ensure PauseMenu exists (it's a DontDestroyOnLoad singleton)
+        if (FindFirstObjectByType<PauseMenu>() == null)
+        {
+            GameObject pauseObj = new GameObject("PauseMenu");
+            pauseObj.AddComponent<PauseMenu>();
+            DontDestroyOnLoad(pauseObj);
+        }
     }
 
     public void LoadMainMenu()

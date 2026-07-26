@@ -12,7 +12,8 @@ public static class SaveSystem
         {
             gameCoins = GameData.Instance.gameCoins,
             prologFinished = GameData.Instance.prologFinished,
-            level1SeriesOfEventsCompleted = GameData.Instance.level1SeriesOfEventsCompleted
+            level1SeriesOfEventsCompleted = GameData.Instance.level1SeriesOfEventsCompleted,
+            missionsCompleted = GameData.Instance.GetMissionsCompleted()
         };
 
         string json = JsonUtility.ToJson(data, true);
@@ -35,6 +36,7 @@ public static class SaveSystem
         GameData.Instance.gameCoins = data.gameCoins;
         GameData.Instance.prologFinished = data.prologFinished;
         GameData.Instance.level1SeriesOfEventsCompleted = data.level1SeriesOfEventsCompleted;
+        GameData.Instance.SetMissionsCompleted(data.missionsCompleted);
 
         Debug.Log("Game Loaded");
     }
@@ -54,4 +56,5 @@ public class SaveData
     public int gameCoins;
     public bool prologFinished;
     public bool level1SeriesOfEventsCompleted;
+    public bool[] missionsCompleted;
 }
