@@ -876,6 +876,7 @@ GameObject:
   - component: {fileID: 367066466}
   - component: {fileID: 367066470}
   - component: {fileID: 367066469}
+  - component: {fileID: 367066471}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1000,9 +1001,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5fbdaa66fe64b54190c332c02df9c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
   coinsText: {fileID: 0}
+  coinIcon: {fileID: 0}
+  currentHealth: 0
+  hitEffect: {fileID: 367066471}
   startingHealth: 150
+--- !u!114 &367066471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367066465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693310904d285e316a4b9d37e53bb853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageOverlay: {fileID: 0}
+  flashDuration: 0.15
+  maxFlashAlpha: 0.5
+  cameraShake: {fileID: 519420034}
+  shakeDuration: 0.1
+  shakeMagnitude: 0.2
 --- !u!1 &478844791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,6 +1215,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1302,6 +1324,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6142ca75b155428458a2c20ae3dbfdb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afba6153eac7ada07918c14b9c5c56cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: c0d554c18f20018d5bf24432e1373c1c, type: 2}
+  resources: {fileID: 0}
+  enableBloom: 1
+  enableColorGrading: 1
+  enableVignette: 1
+  enableAmbientOcclusion: 0
+  enableDepthOfField: 0
 --- !u!4 &590094994 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7750183251787183378, guid: 80d5a8c8819c3b449b550e6e69db4b2e, type: 3}

@@ -12,20 +12,32 @@ public class Dialog : MonoBehaviour
     public UnityEvent onDialogComplete;
     int index;
     public GameObject textBox;
+    private CursorManager cursorManager;
 
-    
+    void Awake()
+    {
+        // Hide textBox in Awake() so it runs BEFORE any other script's Start().
+        // This prevents a race where another script's Start() shows the box,
+        // then this Start() hides it (order is undefined between objects).
+        if (textBox != null)
+            textBox.SetActive(false);
+    }
+
     void Start()
     {
         if (text != null)
             text.text = string.Empty;
-        
-        if (textBox != null)
-            textBox.SetActive(false);
+
+        cursorManager = FindFirstObjectByType<CursorManager>();
     }
 
     void Update()
     {
         if (!DialogActive || dialogLines == null || dialogLines.Length == 0)
+            return;
+
+        // Don't progress dialog while game is paused
+        if (PauseMenu.IsPaused)
             return;
 
         if (Input.GetMouseButtonDown(0))
@@ -55,6 +67,12 @@ public class Dialog : MonoBehaviour
         // Reset to first line
         index = 0;
         DialogActive = true;
+        
+        // Notify cursor manager to show cursor during dialog
+        if (cursorManager == null)
+            cursorManager = FindFirstObjectByType<CursorManager>();
+        if (cursorManager != null)
+            cursorManager.OnDialogOpened();
         
         // Make sure textBox is active
         if (textBox != null)
@@ -102,6 +120,12 @@ public class Dialog : MonoBehaviour
             // END OF DIALOG - CLEAR EVERYTHING
             DialogActive = false;
             
+            // Notify cursor manager to hide cursor again
+            if (cursorManager == null)
+                cursorManager = FindFirstObjectByType<CursorManager>();
+            if (cursorManager != null)
+                cursorManager.OnDialogClosed();
+            
             // Clear the text
             if (text != null)
                 text.text = string.Empty;
@@ -121,6 +145,12 @@ public class Dialog : MonoBehaviour
     {
         StopAllCoroutines();
         DialogActive = false;
+        
+        // Notify cursor manager
+        if (cursorManager == null)
+            cursorManager = FindFirstObjectByType<CursorManager>();
+        if (cursorManager != null)
+            cursorManager.OnDialogClosed();
         
         if (text != null)
             text.text = string.Empty;

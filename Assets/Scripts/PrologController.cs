@@ -14,10 +14,10 @@ public class PrologController : MonoBehaviour
         {
             dialog.dialogLines = new string[]
             {
-                "Coach : To move around the game use arrow keys or WASD. \n To progress through this and any dialog press the Left mouse button",
-                "Coach : To shoot aim the barrel to the target using mouse and shoot using the left mouse button",
-                "Coach : You can collect extra ammo for a specific gun \n by going near ammo boxes with the gun selected",
-                "Coach : Pretty much it. go into the cave and show me what you have got"
+                "Coach : Listen up, rookie. WASD or arrow keys to move. Left-click to advance dialog. Got it?",
+                "Coach : Your weapon follows your mouse — aim at the target and left-click to fire. Don't waste bullets.",
+                "Coach : See ammo boxes scattered around? Walk over 'em with the right gun equipped to grab extra rounds.",
+                "Coach : Alright, that's the basics. The cave ahead is infested — show me you've got what it takes. Move out."
             };
             dialog.textBox.SetActive(true);
             dialog.StartDialog();

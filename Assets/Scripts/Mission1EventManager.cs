@@ -12,12 +12,12 @@ public class Mission1EventManager : MonoBehaviour
     {
         dialog.dialogLines = new string[]
         {
-                "Welcome To your first mission soilder.",
-                "You will soon face a wave of zombies and other creatures..",
-                "This is Lettol city, Grore's capital. it was once a very beautiful city...",
-                "Now it has become infested by zombies",
-                "Kill all of them, for Grore.",
-                "Battle Commencing"
+                "Welcome to your first mission, soldier.",
+                "This is Lettol City — once the crown jewel of Grore. Now it's a graveyard.",
+                "The outbreak started three days ago. 80% of the population is already lost.",
+                "Your objective: clear the sector. Every zombie you put down buys the survivors more time.",
+                "We've lost too much ground already. Don't let them take any more.",
+                "Battle commencing. Make every shot count."
         };
 
         // IMPORTANT: Activate textBox BEFORE starting dialog
@@ -28,9 +28,11 @@ public class Mission1EventManager : MonoBehaviour
 
     public void Update()
     {
-        if (!dialog.gameObject.activeSelf)
+        if (!dialog.DialogActive)
         {
             eSpawner.SummonEnemies();
+            // Deactivate this script after spawning to avoid repeated calls
+            enabled = false;
         }
     }
 }

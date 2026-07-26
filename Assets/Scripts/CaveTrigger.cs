@@ -19,12 +19,12 @@ public class CaveTrigger : MonoBehaviour
             dialogCave.dialogLines = new string[]
             {
                 "You step into the cave...",
-                "It's cold and dark.",
-                "Stalactites hang from the ceiling like sharp teeth.",
-                "Water drips echo through the chamber...",
-                "Something is watching you from the shadows.",
-                "You hear a low growl ahead.",
-                "Maybe you should be careful..."
+                "The air is thick and stale. Somewhere in the darkness, water drips onto stone.",
+                "Stalactites hang from the ceiling like the teeth of some ancient beast.",
+                "Shadows dance at the edge of your vision — or is something moving in them?",
+                "A low growl rumbles from deeper in the tunnel. You're not alone.",
+                "The temperature drops. Whatever's down here, it knows you've arrived.",
+                "Steady your weapon. There's no turning back now."
             };
             
             // IMPORTANT: Activate textBox BEFORE starting dialog

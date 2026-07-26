@@ -25,14 +25,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (dialog.DialogActive)
+        // Prevent movement during active dialog
+        if (dialog != null && dialog.DialogActive)
         {
             rb.linearVelocity = Vector2.zero;
             return;
         }
-        if (isRunning == false)
-            rb.linearVelocity = moveInput * speed;
-        if(isRunning == true)
-            rb.linearVelocity = moveInput * speed * runningMult;
+        
+        rb.linearVelocity = moveInput * speed * (isRunning ? runningMult : 1f);
     }
 }
