@@ -56,6 +56,18 @@ public class MissionsHolder : MonoBehaviour
 
         btn.onPressed.RemoveAllListeners();
 
+        // Block pressing unavailable missions
+        MissionDefinition data = MissionsDatabase.GetMission(missionIndex);
+        if (!data.IsAvailable)
+        {
+            // Disable collider so ButtonScriptable.OnTriggerEnter2D never fires
+            // and Destroy(gameObject) never runs — the label stays put.
+            Collider2D col = missionObj.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = false;
+            return;
+        }
+
         int capturedIndex = missionIndex;
         btn.onPressed.AddListener(() =>
         {
@@ -85,18 +97,21 @@ public class MissionsHolder : MonoBehaviour
         FollowWorldTarget follower = container.AddComponent<FollowWorldTarget>();
         follower.target = missionObj.transform;
         follower.mainCamera = mainCamera;
-        follower.screenOffset = new Vector2(0f, 100f);
+        follower.screenOffset = new Vector2(0f, -100f); // Below the button (below health bar)
 
         // --- Mission title ---
         GameObject titleObj = new GameObject("MissionLabel" + uid);
         titleObj.transform.SetParent(container.transform, false);
 
         TextMeshProUGUI titleTmp = titleObj.AddComponent<TextMeshProUGUI>();
-        titleTmp.text = $"Mission {missionIndex + 1}: {data.MissionName}";
+        if (data.IsAvailable)
+            titleTmp.text = $"Mission {missionIndex + 1}: {data.MissionName}";
+        else
+            titleTmp.text = $"???: [LOCKED]";
         titleTmp.fontSize = 22;
         titleTmp.fontStyle = FontStyles.Bold;
         titleTmp.alignment = TextAlignmentOptions.Center;
-        titleTmp.color = Color.white;
+        titleTmp.color = data.IsAvailable ? Color.white : new Color(0.5f, 0.5f, 0.5f);
 
         RectTransform titleRt = titleTmp.rectTransform;
         titleRt.anchorMin = new Vector2(0.5f, 1f);
@@ -110,11 +125,14 @@ public class MissionsHolder : MonoBehaviour
         subObj.transform.SetParent(container.transform, false);
 
         TextMeshProUGUI subTmp = subObj.AddComponent<TextMeshProUGUI>();
-        subTmp.text = data.Subtitle;
+        if (data.IsAvailable)
+            subTmp.text = data.Subtitle;
+        else
+            subTmp.text = "Coming Soon";
         subTmp.fontSize = 16;
         subTmp.fontStyle = FontStyles.Italic;
         subTmp.alignment = TextAlignmentOptions.Center;
-        subTmp.color = new Color(0.85f, 0.85f, 0.85f);
+        subTmp.color = data.IsAvailable ? new Color(0.85f, 0.85f, 0.85f) : new Color(0.4f, 0.4f, 0.4f);
 
         RectTransform subRt = subTmp.rectTransform;
         subRt.anchorMin = new Vector2(0.5f, 1f);
@@ -128,10 +146,13 @@ public class MissionsHolder : MonoBehaviour
         rewardObj.transform.SetParent(container.transform, false);
 
         TextMeshProUGUI rewardTmp = rewardObj.AddComponent<TextMeshProUGUI>();
-        rewardTmp.text = $"Reward: {data.CoinReward} coins  |  Enemies: {data.MinEnemies}-{data.MaxEnemies}";
+        if (data.IsAvailable)
+            rewardTmp.text = $"Reward: {data.CoinReward} coins  |  Enemies: {data.MinEnemies}-{data.MaxEnemies}";
+        else
+            rewardTmp.text = "";
         rewardTmp.fontSize = 14;
         rewardTmp.alignment = TextAlignmentOptions.Center;
-        rewardTmp.color = new Color(1f, 0.85f, 0f); // Gold
+        rewardTmp.color = data.IsAvailable ? new Color(1f, 0.85f, 0f) : new Color(0.3f, 0.3f, 0.3f);
 
         RectTransform rewardRt = rewardTmp.rectTransform;
         rewardRt.anchorMin = new Vector2(0.5f, 1f);

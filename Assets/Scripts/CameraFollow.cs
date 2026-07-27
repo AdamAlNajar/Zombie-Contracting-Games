@@ -5,6 +5,7 @@ public class CameraFollow : MonoBehaviour
     public Transform target;
     public float smoothSpeed = 10f;
     public Vector3 offset;
+    public GameObject[] pointsToStopAt;
 
     void LateUpdate()
     {

@@ -15,6 +15,7 @@ public class MissionDefinition
     [SerializeField] private int maxEnemies;
     [SerializeField] private int coinReward;
     [SerializeField] private int battleIndex; // which wave config to use in EnemySpawner
+    [SerializeField] private bool isAvailable = true; // whether this mission can be played yet
 
     public string MissionName => missionName;
     public string Subtitle => subtitle;
@@ -24,6 +25,7 @@ public class MissionDefinition
     public int MaxEnemies => maxEnemies;
     public int CoinReward => coinReward;
     public int BattleIndex => battleIndex;
+    public bool IsAvailable => isAvailable;
 
     public MissionDefinition(
         string missionName,
@@ -33,7 +35,8 @@ public class MissionDefinition
         int minEnemies,
         int maxEnemies,
         int coinReward,
-        int battleIndex = 0
+        int battleIndex = 0,
+        bool isAvailable = true
     )
     {
         this.missionName = missionName;
@@ -44,5 +47,6 @@ public class MissionDefinition
         this.maxEnemies = maxEnemies;
         this.coinReward = coinReward;
         this.battleIndex = battleIndex;
+        this.isAvailable = isAvailable;
     }
 }

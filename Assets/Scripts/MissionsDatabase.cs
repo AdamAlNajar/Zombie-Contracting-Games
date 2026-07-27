@@ -125,7 +125,8 @@ public static class MissionsDatabase
             minEnemies: 18,
             maxEnemies: 25,
             coinReward: 80,
-            battleIndex: 1
+            battleIndex: 1,
+            isAvailable: false
         ),
 
         // ===== MISSION 5 (index 4) =====
@@ -151,7 +152,8 @@ public static class MissionsDatabase
             minEnemies: 20,
             maxEnemies: 28,
             coinReward: 100,
-            battleIndex: 2
+            battleIndex: 2,
+            isAvailable: false
         ),
 
         // ===== MISSION 6 (index 5) =====
@@ -178,7 +180,8 @@ public static class MissionsDatabase
             minEnemies: 15,
             maxEnemies: 20,
             coinReward: 90,
-            battleIndex: 0
+            battleIndex: 0,
+            isAvailable: false
         ),
 
         // ===== MISSION 7 (index 6) =====
@@ -204,7 +207,8 @@ public static class MissionsDatabase
             minEnemies: 22,
             maxEnemies: 30,
             coinReward: 110,
-            battleIndex: 1
+            battleIndex: 1,
+            isAvailable: false
         ),
 
         // ===== MISSION 8 (index 7) =====
@@ -231,7 +235,8 @@ public static class MissionsDatabase
             minEnemies: 12,
             maxEnemies: 18,
             coinReward: 85,
-            battleIndex: 0
+            battleIndex: 0,
+            isAvailable: false
         ),
 
         // ===== MISSION 9 (index 8) =====
@@ -257,7 +262,8 @@ public static class MissionsDatabase
             minEnemies: 25,
             maxEnemies: 35,
             coinReward: 130,
-            battleIndex: 2
+            battleIndex: 2,
+            isAvailable: false
         ),
 
         // ===== MISSION 10 (index 9) =====
@@ -283,7 +289,8 @@ public static class MissionsDatabase
             minEnemies: 28,
             maxEnemies: 38,
             coinReward: 140,
-            battleIndex: 1
+            battleIndex: 1,
+            isAvailable: false
         ),
 
         // ===== MISSION 11 (index 10) =====
@@ -310,7 +317,8 @@ public static class MissionsDatabase
             minEnemies: 20,
             maxEnemies: 28,
             coinReward: 160,
-            battleIndex: 2
+            battleIndex: 2,
+            isAvailable: false
         ),
 
         // ===== MISSION 12 (index 11) =====
@@ -336,7 +344,8 @@ public static class MissionsDatabase
             minEnemies: 30,
             maxEnemies: 40,
             coinReward: 150,
-            battleIndex: 1
+            battleIndex: 1,
+            isAvailable: false
         ),
 
         // ===== MISSION 13 (index 12) =====
@@ -362,7 +371,8 @@ public static class MissionsDatabase
             minEnemies: 18,
             maxEnemies: 25,
             coinReward: 95,
-            battleIndex: 0
+            battleIndex: 0,
+            isAvailable: false
         ),
 
         // ===== MISSION 14 (index 13) =====
@@ -388,7 +398,8 @@ public static class MissionsDatabase
             minEnemies: 22,
             maxEnemies: 30,
             coinReward: 120,
-            battleIndex: 2
+            battleIndex: 2,
+            isAvailable: false
         ),
 
         // ===== MISSION 15 (index 14) =====
@@ -416,7 +427,8 @@ public static class MissionsDatabase
             minEnemies: 25,
             maxEnemies: 35,
             coinReward: 175,
-            battleIndex: 1
+            battleIndex: 1,
+            isAvailable: false
         ),
 
         // ===== MISSION 16 (index 15) =====
@@ -446,7 +458,8 @@ public static class MissionsDatabase
             minEnemies: 35,
             maxEnemies: 50,
             coinReward: 250,
-            battleIndex: 2
+            battleIndex: 2,
+            isAvailable: false
         )
     };
 
